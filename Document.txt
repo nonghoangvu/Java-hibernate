@@ -1,5 +1,0 @@
-1. Archetype: org.apache.maven.archetypes:maven-archetype-webapp
-2. Edit configurations...
-3. Add new config -> Tomcat server -> local
-4. Application server -> Configure.. -? path tomcat
-5. Click Deployment -> Add -> Artifact... -> select second.
