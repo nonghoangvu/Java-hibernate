@@ -8,5 +8,7 @@
 <h1><%= "Hello World!" %></h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
+<br>
+<input type="text" name="username" placeholder="Enter your username"></input>
 </body>
 </html>
