@@ -28,6 +28,7 @@
         <table class="table text-center">
             <thead>
             <tr>
+                <th scope="col">STT</th>
                 <th scope="col">EmployeeID</th>
                 <th scope="col">FirstName</th>
                 <th scope="col">LastName</th>
@@ -38,8 +39,9 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${employee}" var="emp">
+            <c:forEach items="${employee}" var="emp" varStatus="i">
                 <tr>
+                    <td>${i.index + 1}</td>
                     <td>${emp.employeeId}</td>
                     <td>${emp.firstName}</td>
                     <td>${emp.lastName}</td>

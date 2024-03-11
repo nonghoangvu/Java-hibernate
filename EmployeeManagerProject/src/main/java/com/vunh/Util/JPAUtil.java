@@ -13,4 +13,10 @@ public class JPAUtil {
         }
         return factory.createEntityManager();
     }
+    public static void shutdown() {
+        if(factory != null || factory.isOpen()) {
+            factory.close();
+        }
+        factory = null;
+    }
 }

@@ -20,20 +20,18 @@ public class CtrlAdd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Employees emp = new Employees();
-        emp.setEmployeeId(Integer.parseInt(req.getParameter("employeeId")));
         emp.setFirstName(req.getParameter("firstName"));
         emp.setLastName(req.getParameter("lastName"));
         emp.setDepartment(req.getParameter("department"));
         emp.setPosition(req.getParameter("position"));
         emp.setSalary(Double.parseDouble(req.getParameter("salary")));
+
         if(this.service.insertEmployee(emp)){
-            req.setAttribute("employee", this.service.getAll());
-            req.getRequestDispatcher("Views/EmployeePage.jsp").forward(req, resp);
-            System.out.println("true");
+//            req.setAttribute("employee", this.service.getAll());
+//            req.getRequestDispatcher("Views/EmployeePage.jsp").forward(req, resp);
+            resp.sendRedirect("admin");
         }else{
             req.getRequestDispatcher("Views/AddEmployee.jsp").forward(req, resp);
-            System.out.println("false");
         }
-        System.out.println("Done");
     }
 }

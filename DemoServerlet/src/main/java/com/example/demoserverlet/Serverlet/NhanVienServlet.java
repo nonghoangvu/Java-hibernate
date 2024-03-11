@@ -1,6 +1,8 @@
 package com.example.demoserverlet.Serverlet;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.demoserverlet.Model.NongHoangVu;
 import jakarta.servlet.http.*;
@@ -12,8 +14,10 @@ public class NhanVienServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        NongHoangVu nv = new NongHoangVu("Nong Hoang Vu", 18, "IT");
-        req.setAttribute("value", nv);
+        List<NongHoangVu> vuList = new ArrayList<>();
+        vuList.add(new NongHoangVu("Vu", 19, "IT"));
+        vuList.add(new NongHoangVu("A", 19, "HR"));
+        req.setAttribute("listVu", vuList);
         req.getRequestDispatcher("/homePage.jsp").forward(req, resp);
     }
 

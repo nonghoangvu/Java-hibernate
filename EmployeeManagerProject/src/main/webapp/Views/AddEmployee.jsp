@@ -24,10 +24,6 @@
     <h1 class="text-center">New Employee</h1>
     <form action="add" method="post">
         <div class="mb-3">
-            <label for="employeeId" class="form-label">Employee ID:</label>
-            <input type="text" class="form-control" id="employeeId" name="employeeId" placeholder="EmployeeID">
-        </div>
-        <div class="mb-3">
             <label for="firstName" class="form-label">FirstName:</label>
             <input type="text" class="form-control" id="firstName" name="firstName" placeholder="FirstName">
         </div>
