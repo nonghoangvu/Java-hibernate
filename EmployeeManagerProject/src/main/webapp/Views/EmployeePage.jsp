@@ -49,9 +49,9 @@
                     <td>${emp.position}</td>
                     <td>${emp.salary}</td>
                     <td>
-                        <a class="btn btn-warning" href="#${emp.employeeId}">Edit</a>
-                        <a class="btn btn-danger" href="#${emp.employeeId}">Delete</a>
-                        <a class="btn btn-primary" href="#${emp.employeeId}">Detail</a>
+                        <a class="btn btn-warning" href="edit?id=${emp.employeeId}">Edit</a>
+                        <a class="btn btn-danger" onclick="askDel(${emp.employeeId})">Delete</a>
+                        <a class="btn btn-primary" href="detail?id=${emp.employeeId}">Detail</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -59,6 +59,14 @@
         </table>
     </div>
 </div>
+<script>
+    function askDel(id) {
+        let conf = window.confirm("Are you sure you want to delete this employee");
+        if (conf) {
+            window.location.href = "delete?id=" + id;
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

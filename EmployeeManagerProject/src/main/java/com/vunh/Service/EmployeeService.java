@@ -37,4 +37,32 @@ public class EmployeeService {
             return false;
         }
     }
+
+    public Boolean deleteEmployee(Integer id) {
+        try {
+            this.em.getTransaction().begin();
+            Employees emp = this.em.find(Employees.class, id);
+            this.em.remove(emp);
+            this.em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            return false;
+        }
+    }
+
+    public Boolean updateEmployee(Employees emp) {
+        try {
+            this.em.getTransaction().begin();
+            this.em.merge(emp);
+            this.em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+            return false;
+        }
+    }
+    public Employees getEmployee(Integer id) {
+        return this.em.find(Employees.class, id);
+    }
 }

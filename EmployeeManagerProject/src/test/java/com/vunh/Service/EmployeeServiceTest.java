@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeServiceTest{
+    private final  EmployeeService s = new EmployeeService();
     @Test
     void insertEmployee() {EmployeeService service = new EmployeeService();
         EmployeeService s = new EmployeeService();
@@ -19,6 +20,10 @@ class EmployeeServiceTest{
         employees.setPosition("Dev");
         employees.setSalary(100f);
         assertEquals(true, s.insertEmployee(employees));
+    }
 
+    @Test
+    void testDelete(){
+        assertEquals(true, this.s.deleteEmployee(20));
     }
 }
