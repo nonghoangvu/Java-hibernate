@@ -44,7 +44,7 @@
             <input type="number" class="form-control" id="salary" name="salary" placeholder="Salary" value="${emp.salary}" disabled>
         </div>
         <div class="text-center">
-            <a class="btn btn-danger" href="admin">Cancel</a>
+            <a class="btn btn-danger" href="admin?index=0">Cancel</a>
         </div>
     </form>
 </div>

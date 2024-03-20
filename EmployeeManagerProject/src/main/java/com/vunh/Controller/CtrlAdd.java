@@ -7,6 +7,7 @@ import com.vunh.Service.EmployeeService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.ServletException;
+import org.apache.commons.beanutils.BeanUtils;
 
 @WebServlet(name = "CtrlAddServlet", value = "/add")
 public class CtrlAdd extends HttpServlet {
@@ -19,19 +20,16 @@ public class CtrlAdd extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employees emp = new Employees();
-        emp.setFirstName(req.getParameter("firstName"));
-        emp.setLastName(req.getParameter("lastName"));
-        emp.setDepartment(req.getParameter("department"));
-        emp.setPosition(req.getParameter("position"));
-        emp.setSalary(Double.parseDouble(req.getParameter("salary")));
-
-        if(this.service.insertEmployee(emp)){
-//            req.setAttribute("employee", this.service.getAll());
-//            req.getRequestDispatcher("Views/EmployeePage.jsp").forward(req, resp);
-            resp.sendRedirect("admin");
-        }else{
-            req.getRequestDispatcher("Views/AddEmployee.jsp").forward(req, resp);
+        try {
+            Employees emp = new Employees();
+            BeanUtils.populate(emp, req.getParameterMap());
+            if (this.service.insertEmployee(emp)) {
+                resp.sendRedirect("admin?index=0");
+            } else {
+                req.getRequestDispatcher("Views/AddEmployee.jsp").forward(req, resp);
+            }
+        }catch (Exception e){
+            throw new EOFException("Error something!");
         }
     }
 }

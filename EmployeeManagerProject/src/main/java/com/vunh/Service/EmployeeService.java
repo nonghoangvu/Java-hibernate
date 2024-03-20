@@ -17,13 +17,19 @@ public class EmployeeService {
         super.finalize();
     }
 
-    public List<Employees> getAll() {
+    public List<Employees> getAll(int index) {
         try {
             TypedQuery<Employees> query = em.createQuery("SELECT e FROM Employees e", Employees.class);
+            query.setFirstResult(index);
+            query.setMaxResults(3);
             return query.getResultList();
         } catch (Exception e) {
             return null;
         }
+    }
+    public int getCountPage(){
+        TypedQuery<Employees> query = em.createQuery("SELECT e FROM Employees e", Employees.class);
+        return query.getResultList().size();
     }
 
     public Boolean insertEmployee(Employees emp) {

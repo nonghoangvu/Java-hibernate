@@ -1,0 +1,119 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: NONG HOANG VU
+  Date: 3/18/2024
+  Time: 2:39 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <form action="/add" method="post">
+        <div class="mb-3">
+            <label class="form-label">Ma nhan vien</label>
+            <input type="text" class="form-control" id="manv" aria-describedby="emailHelp" name="maNhanVien">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ten nhan vien</label>
+            <input type="text" class="form-control" id="ten" aria-describedby="emailHelp" name="tenNhanVien">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dia chi</label>
+            <input type="text" class="form-control" id="diaChi" aria-describedby="emailHelp" name="diaChi">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tuoi</label>
+            <input type="number" class="form-control" id="tuoi" aria-describedby="emailHelp" name="tuoi">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phong ban</label>
+            <select class="form-select" aria-label="Default select example" name="phongBan">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Gioi tinh</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gioiTinh" id="inlineRadio1"
+                       value="true" checked>
+                <label class="form-check-label" for="inlineRadio1">Nam</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gioiTinh" id="inlineRadio2"
+                       value="false">
+                <label class="form-check-label" for="inlineRadio2">Nu</label>
+            </div>
+        </div>
+        <div class="text-start">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <form action="#" method="post">
+        <h2>Chuc nang tim kiem</h2>
+        <div class="mb-3">
+            <label class="form-label">Ten nhan vien</label>
+            <input type="text" class="form-control" id="ma" aria-describedby="emailHelp">
+        </div>
+    </form>
+    <div>
+        <h2>Danh sach nhan vien</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">MaNhanVien</th>
+                <th scope="col">HoTen</th>
+                <th scope="col">DiaChi</th>
+                <th scope="col">Tuoi</th>
+                <th scope="col">GioiTinh</th>
+                <th scope="col">PhongBan</th>
+                <th scope="col">ChucNang</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="x" items="${ListNhanVien}" varStatus="i">
+                <tr>
+                    <td>${i.index + 1}</td>
+                    <td>${x.maNhanVien}</td>
+                    <td>${x.tenNhanVien}</td>
+                    <td>${x.diaChi}</td>
+                    <td>${x.tuoi}</td>
+                    <td>${x.gioiTinh?"Nam":"Nu"}</td>
+                    <td>${x.phongBan}</td>
+                    <td>
+                        <button onclick="deleteByIndex(${i.index})" class="btn btn-danger">Xoa</button>
+                        <a class="btn btn-warning" href="/detail?id=${x.maNhanVien}">Chi tiet</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script>
+    function deleteByIndex(index) {
+        console.log(index)
+        let confirm = window.confirm("Are you sure want to remove this employee?");
+        if (confirm) {
+            window.location.href = "/delete?index=" + index;
+        }
+    }
+</script>
+</html>

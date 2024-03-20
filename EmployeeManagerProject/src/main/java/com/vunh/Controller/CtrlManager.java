@@ -1,26 +1,37 @@
 package com.vunh.Controller;
 
 import java.io.*;
+import java.util.List;
 
+import com.vunh.Model.Employees;
 import com.vunh.Service.EmployeeService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.ServletException;
 
-@WebServlet(name = "CtrlManagerServlet", value = {"/admin", "/delete/*"})
+@WebServlet(name = "CtrlManagerServlet", value = {"/admin/*", "/delete/*"})
 public class CtrlManager extends HttpServlet {
-    private final EmployeeService service = new EmployeeService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
+        EmployeeService service = new EmployeeService();
         if (req.getRequestURI().contains("delete")) {
-            if (this.service.deleteEmployee(Integer.valueOf(id))) {
-                resp.sendRedirect("admin");
+            if (service.deleteEmployee(Integer.valueOf(req.getParameter("id")))) {
+                resp.sendRedirect("admin?index=0");
             }
+        } else {
+
+            List<Employees> lsistEmployees = service.getAll(Integer.parseInt(req.getParameter("index")));
+            int page = service.getCountPage();
+            int size = 3;
+            int endPage = page / size;
+            if (page % size != 0) {
+                endPage++;
+            }
+            req.setAttribute("endPage", endPage);
+            req.setAttribute("employee", lsistEmployees);
+            req.getRequestDispatcher("Views/EmployeePage.jsp").forward(req, resp);
         }
-        req.setAttribute("employee", this.service.getAll());
-        req.getRequestDispatcher("Views/EmployeePage.jsp").forward(req, resp);
     }
 
     @Override
