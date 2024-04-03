@@ -21,15 +21,16 @@ public class EmployeeService {
         try {
             TypedQuery<Employees> query = em.createQuery("SELECT e FROM Employees e", Employees.class);
             query.setFirstResult(index);
-            query.setMaxResults(3);
+            query.setMaxResults(40);
             return query.getResultList();
         } catch (Exception e) {
             return null;
         }
     }
-    public int getCountPage(){
-        TypedQuery<Employees> query = em.createQuery("SELECT e FROM Employees e", Employees.class);
-        return query.getResultList().size();
+
+    public Long getCountPage() {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(e) FROM Employees e", Long.class);
+        return query.getSingleResult();
     }
 
     public Boolean insertEmployee(Employees emp) {
@@ -68,6 +69,7 @@ public class EmployeeService {
             return false;
         }
     }
+
     public Employees getEmployee(Integer id) {
         return this.em.find(Employees.class, id);
     }

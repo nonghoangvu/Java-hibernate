@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <c:forEach begin="1" end="${endPage}" var="i">
-                        <li class="page-item"><a class="page-link" href="admin?index=${i * 3 -2 -1}">${i}</a></li>
+                        <li class="page-item"><a class="page-link" href="admin?index=${i * 40 -2 -1}">${i}</a></li>
                     </c:forEach>
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">

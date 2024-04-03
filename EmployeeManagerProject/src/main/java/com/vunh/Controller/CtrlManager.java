@@ -22,9 +22,9 @@ public class CtrlManager extends HttpServlet {
         } else {
 
             List<Employees> lsistEmployees = service.getAll(Integer.parseInt(req.getParameter("index")));
-            int page = service.getCountPage();
-            int size = 3;
-            int endPage = page / size;
+            long page = service.getCountPage();
+            int size = 40;
+            long endPage = page / size;
             if (page % size != 0) {
                 endPage++;
             }

@@ -9,5 +9,7 @@
 <a href="admin?index=0">Go to employee management here!</a>
 <c:set var="numA" value="1" scope="page"/>
 Number A is <c:out value="${numA}"/>
+<br>
+<h1>Hello guys</h1>
 </body>
 </html>
